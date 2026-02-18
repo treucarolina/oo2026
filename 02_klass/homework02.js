@@ -3,9 +3,11 @@ var Player = /** @class */ (function () {
         this.itemValue = itemValue;
         this.levelPoints = levelPoints;
     }
+    //Calculates how many points a player has based on the items
     Player.prototype.pointsTotal = function (amount) {
         return amount * this.itemValue;
     };
+    //Calculates how many lvl points a player has also based on the items
     Player.prototype.levelPointsTotal = function (amount) {
         return amount * this.levelPoints;
     };
