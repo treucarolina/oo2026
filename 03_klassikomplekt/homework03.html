@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood chart</title>
+    <script src="homework03.js"></script>
+    <script>
+        let p1;
+        let p2;
+        function startPage(){
+            let canvas=document.getElementById("canvas1");
+            let ctx=canvas.getContext("2d");
+            p1=new Mood(120,ctx,250,350,100);
+            p2= new Mood(140,ctx,250,350,150);
+            p3= new Mood(140,ctx,250,350,200);
+
+            //During the page load, make the slider match the resistor value
+            document.getElementById("range1").value=String(p1.getR());
+            //During the page load: make the span value match the resistor value
+            document.getElementById("val1").innerText=p1.getR();
+
+            document.getElementById("range2").value=String(p2.getR());
+            document.getElementById("val2").innerText=p2.getR();
+
+            document.getElementById("range3").value=String(p3.getR());
+            document.getElementById("val3").innerText=p3.getR();
+        }
+
+        function onRange1(input){
+            const v=input.valueAsNumber;
+            p1.setR(v);
+            document.getElementById("val1").innerText=v;
+        }
+        function onRange2(input){
+            const v=input.valueAsNumber;
+            p2.setR(v);
+            document.getElementById("val2").innerText=v;
+        }
+        function onRange3(input){
+            const v=input.valueAsNumber;
+            p3.setR(v);
+            document.getElementById("val3").innerText=v;
+        }
+
+    </script>
+</head>
+<body onload="startPage()">
+    <h2>Mood chart</h2>
+    <canvas id="canvas1" width="400" height="300"></canvas>
+    <p>calmness</p>
+    <input type="range" id="range1" min="1" max="10" oninput="onRange1(this)"/>
+    <span id="val1"></span>points
+    <p>happiness</p>
+    <input type="range" id="range2" min="1" max="10" oninput="onRange2(this)"/>
+    <span id="val2"></span>points
+    <p>confusion</p>
+    <input type="range" id="range3" min="1" max="10" oninput="onRange3(this)"/>
+    <span id="val3"></span>points
+    
+</body>
+</html>
