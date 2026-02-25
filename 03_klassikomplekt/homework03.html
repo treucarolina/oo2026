@@ -9,12 +9,13 @@
         let p1;
         let p2;
         let p3;
+        let p4;
         function startPage(){
             let canvas=document.getElementById("canvas1");
             let ctx=canvas.getContext("2d");
-            p1=new Mood(120,ctx,250,350,100);
-            p2= new Mood(140,ctx,250,350,150);
-            p3= new Mood(140,ctx,250,350,200);
+            p1=new Mood(0,ctx,250,350,100);
+            p2= new Mood(0,ctx,250,350,150);
+            p3= new Mood(0,ctx,250,350,200);
 
             //During the page load, make the slider match the mood box value
             document.getElementById("range1").value=String(p1.getR());
