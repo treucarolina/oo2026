@@ -8,6 +8,7 @@
     <script>
         let p1;
         let p2;
+        let p3;
         function startPage(){
             let canvas=document.getElementById("canvas1");
             let ctx=canvas.getContext("2d");
@@ -15,9 +16,9 @@
             p2= new Mood(140,ctx,250,350,150);
             p3= new Mood(140,ctx,250,350,200);
 
-            //During the page load, make the slider match the resistor value
+            //During the page load, make the slider match the mood box value
             document.getElementById("range1").value=String(p1.getR());
-            //During the page load: make the span value match the resistor value
+            //During the page load: make the span value match the mood box value
             document.getElementById("val1").innerText=p1.getR();
 
             document.getElementById("range2").value=String(p2.getR());

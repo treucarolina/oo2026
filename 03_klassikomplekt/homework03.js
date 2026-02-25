@@ -4,7 +4,7 @@ var Mood = /** @class */ (function () {
     startx, 
     //x position where the mood box is going to end
     endx, 
-    //how far down the screen we are going to draw the personality box. Y increases, diagram goes down
+    //how far down the screen we are going to draw the mood box. Y increases, diagram goes down
     y) {
         this.p = p;
         this.g = g;
