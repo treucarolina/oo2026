@@ -1,5 +1,22 @@
-class Polygon{
-    constructor(protected x:number[], protected y:number[]){}
+class Graph {
+    constructor(protected startx:number, protected endx:number, protected starty:number, protected endy:number){}
+
+    draw(g:CanvasRenderingContext2D, label:string = ""):void {
+
+        g.beginPath();
+        g.moveTo(this.startx, this.starty);
+        g.lineTo(this.endx, this.endy);
+        g.stroke();
+        
+        g.font = "17px Times New Roman";
+        g.fillStyle = "black";
+        g.fillText(label, this.endx + 8, this.starty + 8);
+
+    }
+}
+
+class Graph2 {
+     constructor(protected x:number[], protected y:number[]){}
 
     //Create a method that adds new points to the polygon
     add(x:number, y:number):void{
@@ -28,14 +45,6 @@ class Polygon{
             );
         }
 
-        //Add the distance from the last point back to the first point
-        total += this.distance(
-            this.x[this.x.length-1], //this.x.length = 3 for a triangle but to get the last we start from 0 w index so the last needs to be 2
-            this.y[this.y.length-1],
-            this.x[0],
-            this.y[0]
-        ); //last x, last y, first x, first y
-
         return total;
     }
 
@@ -51,12 +60,8 @@ class Polygon{
         }
         //moveTo already draws the first point
         //point 0 to point 1- draw a line to point 1
-        g.lineTo(this.x[0], this.y[0]);
 
         g.stroke();
+
     }
 }
-
-//let p1= new Polygon([50,30,40],[40,30,50]);
-//console.log(p1);
-

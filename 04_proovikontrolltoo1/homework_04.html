@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polygon</title>
+    <script src="homework_04.js"> </script>
+    <script>
+
+            function findY(x) {
+                let y= []
+                for(let i=0; i<x.length; i++){
+                    y.push((x[i]*x[i])/ 500 + 50)
+                
+                }
+                return y
+            }
+
+            function start(){
+                let xCoordinates = [70, 80, 90, 100, 150, 180, 200, 220, 300];
+                const canvas= document.getElementById("board1");
+                const ctx = canvas.getContext("2d");
+                let p1 = new Graph(200, 200, 0, 300);
+                let p2 = new Graph(50, 350, 150, 150);
+                let s1 = new Graph2([192, 200, 208], [17, 0, 17]);
+                let s2 = new Graph2([333, 350, 333], [142, 150, 158]);
+                let f1 = new Graph2(xCoordinates, findY(xCoordinates))
+                p1.draw(ctx, "y");
+                p2.draw(ctx, "x");
+                s1.draw(ctx);
+                s2.draw(ctx);
+                f1.draw(ctx);
+                
+        }
+    </script>
+</head>
+<body onload="start()">
+    <h1>Mathemathical function graph</h1>
+    <h2>y = x*x/500 + 50</h2>
+    <canvas id="board1" height="300" width="400">
+    </canvas>
+</body>
+</html>
