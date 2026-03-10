@@ -6,19 +6,92 @@
     <title>Document</title>
     <script src="homework_05.js"> </script>
     <script>
-        let item1 = 0;
-        let item2 = 0;
-        let one = document.getElementById("itemOne");
 
-        function buttonClick (){
-                item1 ++
-            document.getElementById("item1p").innerText = item1
+        let items = { 
+            item1: 0, 
+            item2: 0, 
+            item3: 0 
+        };
+
+        const games = {
+            item1: new Game1(10, 70),
+            item2: new Game1(40, 140),
+            item3: new Game1(90, 250)
+        };
+
+        const games2 = {
+            item1: new Game2(5, 50),
+            item2: new Game2(25, 100),
+            item3: new Game2(30, 200)
         }
+
+        function buttonClick2(){
+            let name = document.getElementById("input1").value
+            document.getElementById("uname").innerText = name;
+        }
+
+        function buttonClick(itemNr) {
+            items[itemNr]++;
+
+            document.getElementById(itemNr + "p").innerText = items[itemNr];
+
+            updateLevel();
+            updatePoints();
+            }
+
+        function updateLevel() {
+            let totalLvl = 0;
+            for (let game in games) {
+                totalLvl += games[game].levelPointsTotal(items[game]);
+            }
+            totalLvl = Math.floor(totalLvl / 1000);
+            document.getElementById("level").innerText = totalLvl;
+
+            let totalLvl2 = 0;
+            for (let game in games2) {
+                totalLvl2 += games2[game].levelPointsTotal(items[game]);
+            }
+            totalLvl2 = Math.floor(totalLvl2 / 1000);
+            document.getElementById("level2").innerText = totalLvl2;
+        }
+
+        function updatePoints() {
+            let totalPoints = 0;
+            for (let game in games) {
+                totalPoints += games[game].pointsTotal(items[game]);
+            }
+            document.getElementById("points").innerText = totalPoints;
+
+            let totalPoints2 = 0;
+            for (let game in games2) {
+                totalPoints2 += games2[game].pointsTotal(items[game]);
+            }
+            document.getElementById("points2").innerText = totalPoints2;
+        }
+
     </script>
 </head>
 <body onload="startPage()">
-    <button id="itemOne" onclick="buttonClick()">item 1</button>
-    <p id="item1p">0</p>
+    <h1>Game</h1>
+    <input type="text" id="input1" placeholder="username">
+    <button id="submit" onclick = "buttonClick2()">submit</button><br>
+    <hr>
+    <h2>Username: <span id="uname"></span></h2>
+    <hr>
+    <h3>Press on the items to get points and raise your level</h3>
+    <button id="itemOne" onclick="buttonClick('item1')" style="background-color: burlywood;">common item</button>
+    <p id="item1p" style="color:rgb(111, 83, 47); background-color: rgb(248, 248, 242);">0</p>
+    <button id="itemTwo" onclick="buttonClick('item2')" style="background-color:cadetblue ;">uncommon item</button>
+    <p id="item2p" style="color:rgb(50, 102, 104); background-color: rgb(242, 247, 247);"">0</p>
+    <button id="itemThree" onclick="buttonClick('item3')" style="background-color:fuchsia;">rare item</button>
+    <p id="item3p" style="color:rgb(117, 45, 103); background-color: rgb(245, 239, 245);">0</p>
+    <hr>
+    <h3>EASY GAME MODE</h3>
+    <p>Level: <span id="level">0</span></p>
+    <p>Points: <span id="points">0</span></p>
+    <h3>DIFFICULT GAME MODE</h3>
+    <p>Level2: <span id="level2">0</span></p>
+    <p>Points2: <span id="points2">0</span></p>
 
 </body>
 </html>
