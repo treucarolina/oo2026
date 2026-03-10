@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="homework_05.js"> </script>
+    <script>
+        let item1 = 0;
+        let item2 = 0;
+        let one = document.getElementById("itemOne");
+
+        function buttonClick (){
+                item1 ++
+            document.getElementById("item1p").innerText = item1
+        }
+    </script>
+</head>
+<body onload="startPage()">
+    <button id="itemOne" onclick="buttonClick()">item 1</button>
+    <p id="item1p">0</p>
+
+</body>
+</html>
