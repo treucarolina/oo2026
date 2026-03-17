@@ -1,26 +1,37 @@
 var Battery = /** @class */ (function () {
-    function Battery(maxCapacity, startingChargeLevel, watts) {
+    function Battery(maxCapacity, startingChargeLevel, watts, seconds) {
         this.maxCapacity = maxCapacity;
         this.startingChargeLevel = startingChargeLevel;
         this.watts = watts;
+        this.seconds = seconds;
     }
-    Battery.prototype.startingChargePercentage = function () {
+    Battery.prototype.getStartingChargeLevel = function () {
         return this.startingChargeLevel;
     };
-    Battery.prototype.currentChargingPercentage = function (seconds) {
-        return ((this.watts * seconds) / 3.6) + this.startingChargeLevel;
+    Battery.prototype.currentChargingLevel = function () {
+        return ((this.watts * this.seconds) / 3.6) + this.startingChargeLevel;
     };
     Battery.prototype.notification = function () {
-        if (this.currentChargingPercentage === 0) {
-            var notif = "Warning! Battery too low.";
+        var notif = "";
+        if (this.currentChargingLevel() === 0) {
+            notif = "Warning! Battery too low.";
             console.log(notif);
         }
-        else if (this.currentChargingPercentage == this.maxCapacity) {
-            var notif = "Warning! Battery capacity reached.";
+        else if (this.currentChargingLevel() === this.maxCapacity) {
+            notif = "Warning! Battery capacity reached.";
             console.log(notif);
         }
+        else if (this.currentChargingLevel() > this.maxCapacity) {
+            notif = "Warning! Battery capacity overreached.";
+            console.log(notif);
+        }
+        return notif;
+    };
+    Battery.prototype.chargingPercentage = function () {
+        return this.currentChargingLevel();
     };
     return Battery;
 }());
-var b1 = new Battery(100, 2, 50);
-console.log(b1.startingChargePercentage());
+var b1 = new Battery(100, 2, 50, 10);
+console.log(b1.getStartingChargeLevel());
+console.log(b1.notification());
