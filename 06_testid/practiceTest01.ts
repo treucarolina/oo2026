@@ -24,10 +24,12 @@ class Battery {
     }
 
     chargingPercentage(): number{
-        return (this.currentChargingLevel() * 100) / this.maxCapacity
+        return ((this.currentChargingLevel() * 100) / this.maxCapacity)
     }
 }
 
 let b1 = new Battery(100, 2, 50, 10);
 console.log(b1.getStartingChargeLevel());
 console.log(b1.notification());
+console.log(b1.chargingPercentage());
+console.log(b1.currentChargingLevel());

@@ -28,10 +28,12 @@ var Battery = /** @class */ (function () {
         return notif;
     };
     Battery.prototype.chargingPercentage = function () {
-        return this.currentChargingLevel();
+        return ((this.currentChargingLevel() * 100) / this.maxCapacity);
     };
     return Battery;
 }());
 var b1 = new Battery(100, 2, 50, 10);
 console.log(b1.getStartingChargeLevel());
 console.log(b1.notification());
+console.log(b1.chargingPercentage());
+console.log(b1.currentChargingLevel());

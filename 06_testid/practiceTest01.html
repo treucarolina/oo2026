@@ -7,9 +7,22 @@
     <script src="practiceTest01.js"></script>
     <script>
 
+        function secChange(){
+            let seconds = document.getElementById("inputSec").value;
+            let battery = new Battery(200, 20, 50, seconds);
+            document.getElementById("battery").innerText = battery.currentChargingLevel();
+            document.getElementById("percentage").innerText = battery.chargingPercentage();
+            document.getElementById("notification").innerText = battery.notification();
+
+        }
+
     </script>
 </head>
 <body>
     <p id="battery">0</p>
+    <p id="percentage">0</p>
+    <p id="notification"></p>
+    <input type="number" id="inputSec" placeholder="0">
+    <button id="b1" onclick="secChange()">submit</button>
 </body>
 </html>
