@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kettle</title>
+    <script src="classTest03.js"></script>
+    <script>
+
+        let waters2=[];
+
+        //Combine all waters into one total
+        let waterTotal=waters2[0];
+        
+        let seconds = 0;
+        function buttonClick2(){
+            seconds = document.getElementById("secondsInput").value;
+        }
+
+        function buttonClick(){
+            let amount = document.getElementById("amountInput").value;
+            let temp = document.getElementById("tempInput").value;
+            let water = new Kettle3(amount, temp);
+            waters.push(water)
+            for(let i=1; i<waters2.length; i++){
+            waterTotal=waterTotal.add(waters2[i]);
+            document.getElementById("waterTemp").innerText = waterTotal.getTemperature(seconds);
+        }
+
+        
+
+    </script>
+</head>
+<body>
+    <p id="waterTemp">0</p>
+    <p>add seconds the water boils</p>
+    <input id="secondsInput" type="number">
+    <button id="secSubmit" onclick="buttonClick()"">Submit</button>
+    <hr>
+    <p>add water</p>
+    <input id="amountInput" type="number">
+    <p>add water temperature</p>
+    <input id="tempInput" type="number">
+    <button id="waterSubmit" onclick="buttonClick()">Submit</button>
+</body>
+</html>

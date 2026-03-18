@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="classTest02.js"></script>
+    <script>
+
+        function secChange(){
+            let seconds = document.getElementById("inputSec").value;
+            let water = new Kettle2(300, 30);
+            document.getElementById("temperature").innerText = water.getTemperature(seconds);
+            document.getElementById("notification").innerText = water.temperatureCheck();
+
+        }
+
+    </script>
+</head>
+<body>
+    <h2>Water temperature in electrical kettle</h2>
+    <p >Temperature: <span id="temperature">0</span></p>
+    <p>How many seconds the kettle works?</p>
+    <input type="number" id="inputSec" placeholder="0">
+    <button id="button1" onclick="secChange()">submit</button>
+    <hr>
+    <p id="notification"></p>
+</body>
+</html>
