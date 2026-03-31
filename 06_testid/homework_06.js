@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BlogPost = void 0;
 var BlogPost = /** @class */ (function () {
     function BlogPost() {
         //What is currently displayed on the panel
@@ -8,8 +11,11 @@ var BlogPost = /** @class */ (function () {
     };
     BlogPost.prototype.charLength = function (t) {
         var notif = "";
-        if (t.length > 10) {
+        if (t.length > 50) {
             notif = "Too many characters!";
+        }
+        else if (t.length < 10) {
+            notif = "Write more characters!";
         }
         return notif;
     };
@@ -18,6 +24,4 @@ var BlogPost = /** @class */ (function () {
     };
     return BlogPost;
 }());
-/*export{
-    BlogPost
-}*/ 
+exports.BlogPost = BlogPost;

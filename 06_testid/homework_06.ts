@@ -5,15 +5,16 @@ class BlogPost{
     pressButton(t: string):void{
         
         this.text += t;
-        
-        
+
     }
 
     charLength(t: string):string{
         let notif = "";
-        if (t.length > 10) {
+        if (t.length > 50) {
             notif = "Too many characters!"
-        }   
+        } else if (t.length < 10) {
+            notif = "Write more characters!"
+        }
         return notif
     }
 
@@ -22,6 +23,6 @@ class BlogPost{
     }
 }
 
-/*export{
+export{
     BlogPost
-}*/
+}
