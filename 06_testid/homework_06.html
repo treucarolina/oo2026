@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    
+    <script>
+        let blogobj = null;
+        //let exports={};
+        function startPage(){
+
+            blogobj=new BlogPost();
+
+            document.getElementById("blogPanel").innerText = blogobj.getTextContent();
+        }
+
+        //This function runs every time we press the submit button
+        function buttonPress(){
+
+            blogobj.pressButton(document.getElementById("blogText").value);
+            //update the display with the text
+            document.getElementById("blogPanel").innerText=blogobj.getTextContent();
+            document.getElementById("blogText").value = "";
+        }
+
+        function deleteButton () {
+            document.getElementById("blogPanel").innerText = "";
+        }
+
+        function change(e) {
+            document.getElementById("notification").innerText = blogobj.charLength(e.target.value);
+        }
+
+        //This is to expose the function to HTML
+        window.startPage = startPage;
+        window.buttonPress = buttonPress;
+        window.deleteButton = deleteButton;
+        window.change = change;
+    </script>
+    <script src="homework_06.js"></script>
+    <style>
+        #blogPanel{width: 157px;
+                height: 50px;
+                margin-bottom: 10px;
+                border: 1px solid black}
+    </style>
+</head>
+<body onload="startPage()">
+    <label for="blogText">Write your blog post here</label>
+    <textarea id="blogText" placeholder="Write or add to a blog..." oninput="change(event)"></textarea>
+    <button id="submitBtn" onclick="buttonPress()">Submit</button>
+    <p></p>
+    <div id="blogPanel"></div>
+    <button onclick="deleteButton()">Delete</button>
+    <p id="notification"></p>
+</body>
+</html>

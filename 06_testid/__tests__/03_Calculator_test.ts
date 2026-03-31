@@ -4,7 +4,7 @@ let calcobj:Calculator;
 
 //This runs before every test
 //One test might change the calculator
-//if we dont have this next test would start with modified data
+//if we dont have this, next test would start with modified data
 beforeEach(()=>{
     calcobj=new Calculator();
 });
