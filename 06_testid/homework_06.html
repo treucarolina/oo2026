@@ -26,7 +26,7 @@
 
         function deleteButton () {
             document.getElementById("blogText").value = "";
-            blogobj.pressButton("");
+            blogobj.deleteButton();
             document.getElementById("blogPanel").innerText=blogobj.getTextContent();
             document.getElementById("blogPanel").innerText = "";
         }
@@ -43,19 +43,34 @@
     </script>
     <script src="homework_06.js"></script>
     <style>
-        #blogPanel{margin-bottom: 10px;
-                padding: 5px;
-                border: 3px solid rgb(109, 101, 101)}
+        #blogPanel{
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 300px;
+            border: 3px solid rgb(138, 138, 140);
+            word-wrap: break-word;
+            }
+        #submitBtn{
+            background-color: rgb(141, 161, 162);
+            border-radius: 5px;
+        }
+        #deleteBtn{
+            background-color: rgb(195, 121, 121);
+            border-radius: 5px;
+        }
+
+
+        
     </style>
 </head>
 <body onload="startPage()">
     <h1>Blog</h1>
-    <label for="blogText">Write your blog post here</label>
+    <label for="blogText" id="label1">Write to your blog post here: </label>
     <textarea id="blogText" placeholder="Write or add to a blog..." oninput="change(event)"></textarea>
     <button id="submitBtn" onclick="buttonPress()">Submit</button>
     <p></p>
     <div id="blogPanel"></div>
-    <button onclick="deleteButton()">Delete</button>
+    <button id="deleteBtn" onclick="deleteButton()">Delete</button>
     <p id="notification" style=" color:brown"></p>
 </body>
 </html>

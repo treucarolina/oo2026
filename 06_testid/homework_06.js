@@ -9,6 +9,9 @@ var BlogPost = /** @class */ (function () {
     BlogPost.prototype.pressButton = function (t) {
         this.text += t;
     };
+    BlogPost.prototype.deleteButton = function () {
+        this.text = "";
+    };
     BlogPost.prototype.charLength = function (t) {
         var notif = "";
         if (t.length > 50) {

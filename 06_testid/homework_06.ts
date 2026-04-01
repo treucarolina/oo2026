@@ -8,6 +8,10 @@ class BlogPost{
 
     }
 
+    deleteButton():void{
+        this.text = "";
+    }
+
     charLength(t: string):string{
         let notif = "";
         if (t.length > 50) {
