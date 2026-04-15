@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="01_kettle.js"></script>
+    <script>
+        
+        let w2 = null;
+
+        function startPage(){
+            document.getElementById("output").innerText = "No water has been added yet";
+        }
+
+        function startHeater(){
+            
+            const amount = document.getElementById("waterAmount").valueAsNumber;
+            const temperature = document.getElementById("temperature").valueAsNumber;
+            const heatingPower = document.getElementById("heatingPower").valueAsNumber;
+
+            if(isNaN(amount) || isNaN(temperature) || isNaN(heatingPower)) {
+                document.getElementById("output").innerText = "Please fill all the fields before starting heater!";
+                return;
+            }
+
+            w2 = new Water(amount, temperature);
+            w2.setHeatingPower(heatingPower);
+            document.getElementById("output").innerText = "The initial temperature is " + w2.getTemperature().toFixed(2) + "C";
+
+        }
+
+        function heatOneSecond(){
+            if(!w2){
+                document.getElementById("output").innerText = "Please create the kettle first!";
+            }
+            w2.heatASecond();
+            document.getElementById("output").innerText = "New temperature: "+ w2.getTemperature().toFixed(2) + "C";
+        }
+
+        function calculateTime(){
+            if(!w2){
+                document.getElementById("output").innerText = "Please create the kettle first!";
+            }
+            let temp = document.getElementById("targetTemp").valueAsNumber;
+            document.getElementById("output").innerText = "Seconds needed to get target temp: " + w2.secondsNeeded(temp).toFixed(2) + "seconds";
+
+        }
+    </script>
+</head>
+<body onload="startPage()">
+    <h1>Water Heating Demo</h1>
+    <label for="waterAmount">Water amount: </label>
+    <input type="number" id="waterAmount">
+    <br>
+    <br>
+    <label for="temperature">Temperature: </label>
+    <input type="number" id="temperature">
+    <br>
+    <br>
+    <label for="heatingPower">Heating power: </label>
+    <input type="number" id="heatingPower">
+    <br>
+    <br>
+    <input type="button" value="Start heater" onclick="startHeater()">
+    <span id="seconds">0s</span>
+    <br>
+    <br>
+    <input type="button" value="Heat for 1 second" onclick="heatOneSecond()">
+    <br>
+    <label>Target temperature</label>
+    <input type="number" id="targetTemp">
+    <input type="button" value="Calculate heating time" onclick="calculateTime()">
+    <br>
+
+    <br><h2 id="output"></h2>
+</body>
+</html>
