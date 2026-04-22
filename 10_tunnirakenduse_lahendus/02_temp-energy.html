@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material heating demo</title>
+    <script src="02_temp-energy.js"></script>
+    <script>
+        let waterPot = null;
+        let ironRadiator = null;
+        let airInRoom = null;
+
+        function startPage(){
+            document.getElementById("output").innerText = "Enter values and click create objects"
+        }
+    </script>
+</head>
+<body onload="startPage()">
+    
+    <h1>Material Heating Demo</h1>
+    <label for="Material">Choose material: </label>
+    <select name="Material" id="Material" multiple>
+        <option value="Water">Water</option>
+        <option value="Iron">Iron</option>
+        <option value="Air">Air</option>
+    </select>
+    <label for="Mass">Mass: </label>
+    <input type="number" id="waterAmount">
+    <br>
+    <br>
+    <label for="temperature">Temperature: </label>
+    <input type="number" id="temperature">
+    <br>
+    <br>
+    <label for="heatingPower">Heating power: </label>
+    <input type="number" id="heatingPower">
+    <br>
+    <br>
+    <input type="button" value="Start heater" onclick="startHeater()">
+    <br>
+    <br>
+    <input type="button" value="Heat for 1 second" onclick="heatOneSecond()">
+    <br>
+    <label>Target temperature</label>
+    <input type="number" id="targetTemp">
+    <input type="button" value="Calculate heating time" onclick="calculateTime()">
+    <br>
+
+    <h2 id="output"></h2>
+</body>
+</html>
