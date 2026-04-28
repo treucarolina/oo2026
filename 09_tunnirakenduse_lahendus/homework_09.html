@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="homework_09.js"></script>
+    <script>
+        
+        let s2 = null;
+
+        function startPage(){
+            document.getElementById("output").innerText = "Nothing has been selected yet";
+        }
+
+        function optionsSubmitted(){
+            
+            const jobName = document.getElementById("jobName").value;
+            const jobStatus = document.getElementById("jobStatus").value;
+
+            s2 = new Salary(jobName, jobStatus);
+            s2.assignSalContr();
+            document.getElementById("output").innerText = "Job: " + s2.getJobName() + ", Status: " + s2.getJobStatus() + ", Hour wage: " + s2.getHourWage().toFixed(2) + " eouros";
+        }
+
+        function workADay(){
+            if(!s2){
+                document.getElementById("output").innerText = "Please submit the options first!";
+            }
+            
+            document.getElementById("output").innerText = "Salary after 1 day of working: "+ s2.workADay().toFixed(2) + " euros";
+        }
+
+        function calculateDays(){
+            if(!s2){
+                document.getElementById("output").innerText = "Please submit the options first!";
+            }
+            let salary = document.getElementById("targetSal").value;
+            document.getElementById("output").innerText = "Days needed to get target salary: " + Math.ceil(s2.daysNeeded(salary)) + " days";
+        }
+    </script>
+</head>
+<body onload="startPage()">
+    <h1>Salary demo</h1>
+    
+    <label for="jobName">Choose a job: </label>
+    <select id="jobName">
+    <option value="teacher">Teacher</option>
+    <option value="cook">Cook</option>
+    <option value="engineer">Engineer</option>
+    </select>
+    <br>
+    <br>
+    <label for="jobStatus">Choose a status: </label>
+    <select id="jobStatus">
+    <option value="beginner">Beginner</option>
+    <option value="intermediate">Intermediate</option>
+    <option value="professional">Professional</option>
+    </select>
+    <br>
+    <br>
+    <input type="button" value="Submit options" onclick="optionsSubmitted()">
+    <br>
+    <br>
+    <input type="button" value="Work for 1 day" onclick="workADay()">
+    <br>
+    <label>Target salary</label>
+    <input type="number" id="targetSal">
+    <input type="button" value="Calculate days to work" onclick="calculateDays()">
+    <br>
+    <br><h2 id="output"></h2>
+</body>
+</html>
