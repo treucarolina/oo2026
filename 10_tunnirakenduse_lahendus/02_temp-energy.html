@@ -14,7 +14,52 @@
             document.getElementById("output").innerText = "Enter values and click create objects"
         }
 
-        function heatOneSecond(){
+        function changeFields(){
+            const material = document.getElementById("Material").value;
+            const container = document.getElementById("dataInput");
+
+            if  (material === "Air"){
+                container.innerHTML = 
+                `<label for="height">Height: </label><input type="number" id="height">
+                 <label for="width">Width: </label><input type="number" id="width">
+                 <label for="length">Length: </label><input type="number" id="length">
+                `
+            } else {
+                container.innerHTML =
+                `<label for="Mass">Mass: </label>
+                 <input type="number" id="waterAmount">
+                `
+            }
+        }
+
+        function startHeater(){
+            const material = document.getElementById("Material").value;
+            const temperature = document.getElementById("temperature").valueAsNumber;
+            const mass = document.getElementById("Mass").valueAsNumber;
+            const heatCapacity = document.getElementById("heatCapacity").valueAsNumber;
+            const heatingPower = document.getElementById("heatingPower").valueAsNumber;
+
+            if (material === "Air"){
+                const h = document.getElementById("height").valueAsNumber;
+                const w = document.getElementById("width").valueAsNumber;
+                const l = document.getElementById("length").valueAsNumber;
+
+                airInRoom = new AirAmount(l, w, h, temperature);
+                
+                document.getElementById("output").innerText = airInRoom.getCurrentTemperature();
+            } else if (material === "Water") {
+                waterPot = new MaterialAmount(mass, heatCapacity, temperature);
+                document.getElementById("output").innerText = waterPot.getCurrentTemperature();
+            } else if (material === "Iron") {
+                ironRadiator = new MaterialAmount(mass, heatCapacity, temperature);
+                document.getElementById("output").innerText = ironRadiator.getCurrentTemperature();
+            }
+
+        }
+
+        function heatOneDegree(){
+            w2.heatASecond();
+            document.getElementById("output").innerText = "New temperature: "+ w2.getTemperature().toFixed(2) + "C";
             
         }
 
@@ -28,17 +73,23 @@
     
     <h1>Material Heating Demo</h1>
     <label for="Material">Choose material: </label>
-    <select id="Material">
+    <select id="Material" onchange="changeFields()">
         <option value="Water">Water</option>
         <option value="Iron">Iron</option>
         <option value="Air">Air</option>
     </select>
-    <label for="Mass">Mass: </label>
-    <input type="number" id="waterAmount">
+    <div id="dataInput">
+        <label for="Mass">Mass: </label>
+        <input type="number" id="Mass">
+    </div>
     <br>
     <br>
     <label for="temperature">Temperature: </label>
     <input type="number" id="temperature">
+    <br>
+    <br>
+    <label for="heatCapacity">Heat capacity: </label>
+    <input type="number" id="heatCapacity">
     <br>
     <br>
     <label for="heatingPower">Heating power: </label>
@@ -48,7 +99,7 @@
     <input type="button" value="Start heater" onclick="startHeater()">
     <br>
     <br>
-    <input type="button" value="Heat for 1 second" onclick="heatOneSecond()">
+    <input type="button" value="Heat by 1 degree" onclick="heatOneDegree()">
     <br>
     <label>Target temperature</label>
     <input type="number" id="targetTemp">
