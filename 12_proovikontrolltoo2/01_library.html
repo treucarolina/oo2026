@@ -24,20 +24,20 @@
             try{
                 if (type === "book"){
                     item = new Book(
-                        document.getElementById("id").value;
-                        document.getElementById("title").value;
-                        document.getElementById("author").value;
-                        Number(document.getElementById("year").value);
-                        Number(document.getElementById("pages").value);
-                        document.getElementById("ISBN").value;
-                    )
+                        document.getElementById("id").value,
+                        document.getElementById("title").value,
+                        document.getElementById("author").value,
+                        Number(document.getElementById("year").value),
+                        Number(document.getElementById("pages").value),
+                        document.getElementById("ISBN").value,
+                    );
                 } else {
                     item = new DVD(
-                        document.getElementById("id").value;
-                        document.getElementById("title").value;
-                        document.getElementById("author").value;
-                        Number(document.getElementById("year").value);
-                        Number(document.getElementById("duration").value);
+                        document.getElementById("id").value,
+                        document.getElementById("title").value,
+                        document.getElementById("author").value,
+                        Number(document.getElementById("year").value),
+                        Number(document.getElementById("duration").value),
                     )
                 }
                 library.addItem(item);
@@ -51,20 +51,52 @@
             out.innerHTML = "";
             const items = library.getAll();
             if (items.length === 0){out.innerText = "(no items)"; return;}
-            items.forEach(item =>)
-        }
-        
-        function loadFile(){}
-        function download(){}
+            items.forEach(item => {
+                const div =document.createElement("div");
+                div.textContent=item.getSummary();
+                out.appendChild(div)
+            });
+        };
+        function loadFile(){
+            const file = document.getElementById("fileInput").files[0];
+            // If no file selected → stop
+            if (!file) return;
+            // FileReader reads file content
+            const reader = new FileReader();
+            // After file is read
+            reader.onload = function(e) {
+                // Convert text → objects
+                library.loadFromText(e.target.result);
+                // Update display
+                showItems();
+        };
+
+        // Start reading file as text
+        reader.readAsText(file);}
+
+        function download(){
+            // Convert objects → text format
+            const blob = new Blob([library.toText()]);
+            // Create temporary URL for file
+            const url = URL.createObjectURL(blob);
+            // Create temporary link element
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "library.txt";
+            // Trigger download
+            a.click();
+        };
+
 
         //Expose functions to the HTML buttons
-        window.startPage = startPage;
-        window.addItem = addItem;
-        window.showItems = showItems;
-        window.loadFile = loadFile;
-        window.download = download;
-        window.updateForm = updateForm;
+        window.startPage=startPage;
+        window.addItem=addItem;
+        window.showItems=showItems;
+        window.loadFile=loadFile;
+        window.download=download;
+        window.updateForm=updateForm;
     </script>
+    <script src="01_library.js"></script>
 </head>
 <body onload="startPage()">
     <h1>Library system</h1>
@@ -102,7 +134,7 @@
     <hr>
     <h3>Items</h3>
     <button onclick="showItems()">Refresh</button>
-    <div id="option" style="font-family:monospace"></div>
+    <div id="output" style="font-family:monospace"></div>
 
     <hr>
     <h3>Download</h3>

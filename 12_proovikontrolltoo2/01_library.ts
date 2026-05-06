@@ -18,7 +18,7 @@ class Item {
     getTitle():string{return this.title;};
     getYear():number{return this.year;};
     getAuthor():string{return this.author;};
-    getSummary():string{return `{item} $(this.title)`;}
+    getSummary():string{return `{item} ${this.title}`;}
 }
 
 //--------------------------------------------Book------------------------------------------
@@ -91,7 +91,7 @@ class Library{
         const errors:string[] = [];
         for (let line of lines){
             try{
-                const parts = line.split("");
+                const parts = line.split("|");
                 if (parts[0] === "BOOK"){
                     this.addItem(new Book(
                         parts[1], parts[2], parts[3],

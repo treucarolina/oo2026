@@ -35,7 +35,7 @@ var Item = /** @class */ (function () {
     ;
     Item.prototype.getAuthor = function () { return this.author; };
     ;
-    Item.prototype.getSummary = function () { return "{item} $(this.title)"; };
+    Item.prototype.getSummary = function () { return "{item} ".concat(this.title); };
     return Item;
 }());
 exports.Item = Item;
@@ -105,7 +105,7 @@ var Library = /** @class */ (function () {
         for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
             var line = lines_1[_i];
             try {
-                var parts = line.split("");
+                var parts = line.split("|");
                 if (parts[0] === "BOOK") {
                     this.addItem(new Book(parts[1], parts[2], parts[3], Number(parts[4]), Number(parts[5]), parts[6]));
                 }
