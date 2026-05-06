@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="02_test.js"></script>
+    <script>
+
+        let ingr = null;
+        let component = null;
+
+        function startPage(){
+
+        }
+
+        function updateForm(){
+            const dish = document.getElementById("dish").value;
+            document.getElementById("potatoSaladIngr").style.display = dish === "potatoSalad"?"":"none";
+            document.getElementById("fillerIngr").style.display = dish === "filler"?"":"none";
+        }
+
+        function addIngr(){
+            const name = document.getElementById("name").value;
+            const prot = document.getElementById("prot").value;
+            const fats = document.getElementById("fats").value;
+            const carbo = document.getElementById("carbo").value;
+
+            ingr = new FoodItem(name, prot, fats, carbo);
+            
+            prot1 = ingr.getProtein();
+            fats1 = ingr.getFats();
+            carbo1 = ingr.getCarbonHydrates();
+            document.getElementById("name1").innerText = "Name: " + name;
+            document.getElementById("prot1").innerText = "Protein Percentage: " + prot1;
+            document.getElementById("fats1").innerText = "Fats percentage: " + fats1;
+            document.getElementById("carbo1").innerText = "Carbo percentage: " + carbo1;
+        }
+
+        function calculate(){
+            const quantity = document.getElementById("amount").value;
+            const reference = document.getElementById("name").value;
+            const prot = document.getElementById("prot").value;
+            const fats = document.getElementById("fats").value;
+            const carbo = document.getElementById("carbo").value;
+
+            components = new FoodComponent(quantity, name);
+
+            const prot2 = components.proteinContent(ingr.getProtein());
+            const fats2 = components.fatContent(ingr.getFats());
+            const carbo2 = components.carbonhydratesContent(ingr.getCarbonHydrates());
+
+            document.getElementById("prot2").innerText = "Protein: " + prot2.toFixed(2) + "g";
+            document.getElementById("fats2").innerText = "Fats: " + fats2.toFixed(2) + "g";
+            document.getElementById("carbo2").innerText = "Carbohydrates: " + carbo2.toFixed(2) + "g";
+        }
+
+    </script>
+</head>
+<body onload="startPage()">
+    <h1>Dish ingredients</h1>
+    <h2>Add ingredients</h2>
+    <span id="ingredient">
+        <input id="name" type="text" placeholder="name">
+        <input id="prot" type="number" placeholder="protein percentage">
+        <input id="fats" type="number" placeholder="fats percentage">
+        <input id="carbo" type="number" placeholder="carbohydrates percentage">
+        <input type="button" value="add" onclick="addIngr()">
+    </span>
+    <h2>Ingredient information</h2>
+    <p id="name1">Name: </p>
+    <p id="prot1">Protein percentage: </p>
+    <p id="fats1">Fats percentage: </p>
+    <p id="carbo1">Carbohydrates percentage: </p>
+    <br>
+    <h2>Nutriens based off of a given amount</h2>
+    <label for="amount">Insert amount (g): </label>
+    <input type="number" id="amount">
+    <input type="button" value="calculate" onclick="calculate()">
+    <br>
+    <p id="prot2">Protein: </p>
+    <p id="fats2">Fats: </p>
+    <p id="carbo2">Carbohydrates: </p>
+    <br><br>
+    <h2>Choose dish</h2>
+    <select id="dish" onchange="updateForm()">
+        <option value="potatoSalad">potato salad</option>
+        <option value="filler">filler</option>
+    </select>
+    <input type="number">
+    <h2>Ingredients:</h2>
+    <span id="potatoSaladIngr">
+        <p id="potatos">Potatos: 0g</p>
+        <p id="sourcream">Sourcream: 0g</p>
+        <p id="sausage">Sausage: 0g</p>
+    </span>
+    <span id="fillerIngr" style="display: none">
+        <p>Filler: 0g</p>
+    </span>
+</body>
+</html>
