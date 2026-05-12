@@ -7,8 +7,14 @@
     <script>
         let library = null;
         let exports = {};
+        let filter = "";
         function startPage(){
             library = new Library();
+            showItems();
+        }
+
+        function updateFilter(){
+            filter = document.getElementById("filter").value;
             showItems();
         }
 
@@ -50,12 +56,37 @@
             const out = document.getElementById("output");
             out.innerHTML = "";
             const items = library.getAll();
-            if (items.length === 0){out.innerText = "(no items)"; return;}
-            items.forEach(item => {
-                const div =document.createElement("div");
-                div.textContent=item.getSummary();
-                out.appendChild(div)
-            });
+            if (filter === ""){
+                if (items.length === 0){out.innerText = "(no items)"; return;}
+                items.forEach(item => {
+                    const div =document.createElement("div");
+                    div.textContent=item.getSummary();
+                    out.appendChild(div);
+                });
+            } else if (filter === "dvd"){
+                if (items.length === 0){out.innerText = "(no items)"; return;}
+                items.forEach(item => {
+                    line = item.getSummary();
+                    const parts = line.split(" ");
+                    if (parts[0] === "[DVD]"){
+                        const div =document.createElement("div");
+                        div.textContent=item.getSummary();
+                        out.appendChild(div);
+                    } 
+                });
+            } else if (filter === "book") {
+                if (items.length === 0){out.innerText = "(no items)"; return;}
+                items.forEach(item => {
+                    line = item.getSummary();
+                    const parts = line.split(" ");
+                    if (parts[0] === "[Book]"){
+                        const div =document.createElement("div");
+                        div.textContent=item.getSummary();
+                        out.appendChild(div);
+                    } 
+                });
+            }
+            
         };
         function loadFile(){
             const file = document.getElementById("fileInput").files[0];
@@ -132,6 +163,12 @@
     <button onclick="addItem()">Add Item</button>
 
     <hr>
+    <label>Type filter:</label>
+    <select id="filter" onchange="updateFilter()">
+        <option value="">No filter</option>
+        <option value="book">Book</option>
+        <option value="dvd">DVD</option>
+    </select>
     <h3>Items</h3>
     <button onclick="showItems()">Refresh</button>
     <div id="output" style="font-family:monospace"></div>
