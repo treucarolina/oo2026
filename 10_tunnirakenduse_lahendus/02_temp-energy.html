@@ -27,7 +27,7 @@
             } else {
                 container.innerHTML =
                 `<label for="Mass">Mass: </label>
-                 <input type="number" id="waterAmount">
+                 <input type="number" id="Mass">
                 `
             }
         }
@@ -35,7 +35,6 @@
         function startHeater(){
             const material = document.getElementById("Material").value;
             const temperature = document.getElementById("temperature").valueAsNumber;
-            const mass = document.getElementById("Mass").valueAsNumber;
             const heatCapacity = document.getElementById("heatCapacity").valueAsNumber;
             const heatingPower = document.getElementById("heatingPower").valueAsNumber;
 
@@ -46,25 +45,34 @@
 
                 airInRoom = new AirAmount(l, w, h, temperature);
                 
-                document.getElementById("output").innerText = airInRoom.getCurrentTemperature();
-            } else if (material === "Water") {
+                document.getElementById("output").innerText = "Current temperature: " + airInRoom.getCurrentTemperature() + "degrees Celcius";
+            } else if (material === "Water") { 
+                const mass = document.getElementById("Mass").valueAsNumber;
                 waterPot = new MaterialAmount(mass, heatCapacity, temperature);
-                document.getElementById("output").innerText = waterPot.getCurrentTemperature();
+                document.getElementById("output").innerText = "Current temperature: " + waterPot.getCurrentTemperature() + "degrees Celcius";
             } else if (material === "Iron") {
+                const mass = document.getElementById("Mass").valueAsNumber;
                 ironRadiator = new MaterialAmount(mass, heatCapacity, temperature);
-                document.getElementById("output").innerText = ironRadiator.getCurrentTemperature();
+                document.getElementById("output").innerText = "Current temperature: " + ironRadiator.getCurrentTemperature() + "degrees Celcius";
             }
 
         }
 
         function heatOneDegree(){
-            w2.heatASecond();
-            document.getElementById("output").innerText = "New temperature: "+ w2.getTemperature().toFixed(2) + "C";
+            const heatingPower = document.getElementById("heatingPower").valueAsNumber;
+            let activeObj = waterPot || ironRadiator || airInRoom;
+
+            activeObj.getNewTemperature(heatingPower);
+            document.getElementById("output").innerText = "New temperature: "+ activeObj.getCurrentTemperature().toFixed(2) + "C";
             
         }
 
-        function calculateTime(){
-            
+        function calculateEnergy(){
+            const heatingPower = document.getElementById("heatingPower").valueAsNumber;
+            let activeObj = waterPot || ironRadiator || airInRoom;
+
+            activeObj.getNewTemperature(heatingPower);
+            document.getElementById("output").innerText = "New temperature: "+ activeObj.getCurrentTemperature().toFixed(2) + "C";
         }
 
     </script>
