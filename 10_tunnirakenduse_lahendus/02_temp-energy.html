@@ -45,15 +45,15 @@
 
                 airInRoom = new AirAmount(l, w, h, temperature);
                 
-                document.getElementById("output").innerText = "Current temperature: " + airInRoom.getCurrentTemperature() + "degrees Celcius";
+                document.getElementById("output").innerText = "Current temperature: " + airInRoom.getCurrentTemperature() + " degrees C";
             } else if (material === "Water") { 
                 const mass = document.getElementById("Mass").valueAsNumber;
                 waterPot = new MaterialAmount(mass, heatCapacity, temperature);
-                document.getElementById("output").innerText = "Current temperature: " + waterPot.getCurrentTemperature() + "degrees Celcius";
+                document.getElementById("output").innerText = "Current temperature: " + waterPot.getCurrentTemperature() + " degrees C";
             } else if (material === "Iron") {
                 const mass = document.getElementById("Mass").valueAsNumber;
                 ironRadiator = new MaterialAmount(mass, heatCapacity, temperature);
-                document.getElementById("output").innerText = "Current temperature: " + ironRadiator.getCurrentTemperature() + "degrees Celcius";
+                document.getElementById("output").innerText = "Current temperature: " + ironRadiator.getCurrentTemperature() + " degrees C";
             }
 
         }
@@ -63,16 +63,13 @@
             let activeObj = waterPot || ironRadiator || airInRoom;
 
             activeObj.getNewTemperature(heatingPower);
-            document.getElementById("output").innerText = "New temperature: "+ activeObj.getCurrentTemperature().toFixed(2) + "C";
+            document.getElementById("output").innerText = "New temperature: "+ activeObj.getCurrentTemperature().toFixed(2) + " C";
             
         }
 
         function calculateEnergy(){
-            const heatingPower = document.getElementById("heatingPower").valueAsNumber;
             let activeObj = waterPot || ironRadiator || airInRoom;
-
-            activeObj.getNewTemperature(heatingPower);
-            document.getElementById("output").innerText = "New temperature: "+ activeObj.getCurrentTemperature().toFixed(2) + "C";
+            document.getElementById("output").innerText = "Energy needed to heat for 1 second: "+ activeObj.getJoulesPerKelvin().toFixed(2) + " J";
         }
 
     </script>
@@ -109,9 +106,8 @@
     <br>
     <input type="button" value="Heat by 1 degree" onclick="heatOneDegree()">
     <br>
-    <label>Target temperature</label>
-    <input type="number" id="targetTemp">
-    <input type="button" value="Calculate heating time" onclick="calculateTime()">
+    <br>
+    <input type="button" value="Calculate heating time" onclick="calculateEnergy()">
     <br>
 
     <h2 id="output"></h2>
