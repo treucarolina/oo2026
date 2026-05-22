@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="eksam.js"></script>
+
+    <script>
+        video = new VideoAction();
+
+        function setVolume(){
+            let vol = document.getElementById("volBtn").value;
+            video.setVolume(vol);
+        }
+
+        function setSpeed(){
+            let speed = document.getElementById("speedBtn").value;
+            video.setSpeed(speed);
+
+        }
+
+        function setPosition(){
+            let position = document.getElementById("positionBtn").value;
+            video.setPosition(position);
+        }
+
+    </script>
+</head>
+
+<body>
+    <video id="ifiVideo" controls width="600" preload="none">
+        <source src="../../~rinde/media/videos/IFI_reklaam_no_audio.mp4" type="video/mp4">
+    </video>
+    <br>
+    <label for="volBtn">Helitugevus: </label>
+    <input id="volBtn" type="range" min="0" max="1" step=".01" value=".7" onchange="setVolume()">
+    <br>
+    <label for="speedBtn">Esituskiirus: </label>
+    <input id="speedBtn" type="range" min=".1" max="5" step=".01" value="1" onchange="setSpeed()">
+    <br>
+    <p>Video positsioon: <span id="musicPos">0:00:00:00</span></p>
+	<input id="musicPosBtn" type="range" min="0" value="0" step=".001" onchange="setPosition()">
+</body>
+</html>
