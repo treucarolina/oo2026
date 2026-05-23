@@ -1,20 +1,54 @@
-class Activity {
-    pressInfoButton(){
+let sound = new Audio();
 
+abstract class Activity {
+    questions:string;
+    exerciseInfo:string;
+    teacherInfo:string;
+
+    constructor(questions:string, exerciseInfo:string, teacherInfo:string){
+        this.exerciseInfo = exerciseInfo;
+        this.teacherInfo = teacherInfo;
+        this.questions = questions;
     }
+
+
+    getExerciseInfo():string{}
+    getQuestionsPrompt():string{}
+    getInfoPrompt():string{}
 }
 
-class VideoActivity extends Activity{
+abstract class VideoActivity extends Activity{
 
     constructor(){super()}
 
-    changeVolume(){}
+    play():boolean{}
+
+    pause():boolean{}
+
+    changeVolume():number{}
 
     mute(){}
 
-    changeSpeed(){
+    // htmls leida alumised kaks
+    getPlaybackRate():number{
 
     }
 
-    play(){}
+    getVideoLength():number{
+
+    }
+
+    
+}
+
+class SpeedVideo extends VideoActivity {
+
+    changeSpeed(){
+
+        }
+
+    reset(){
+
+    }
+
 }
