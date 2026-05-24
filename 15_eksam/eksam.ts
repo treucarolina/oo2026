@@ -1,7 +1,9 @@
-let sound = new Audio();
+
+/*let popup:HTMLElement = document.getElementById("popup");*/
 
 abstract class Activity {
-    questions:string;
+    popup:HTMLElement;
+    /*questions:string;
     exerciseInfo:string;
     teacherInfo:string;
 
@@ -9,42 +11,62 @@ abstract class Activity {
         this.exerciseInfo = exerciseInfo;
         this.teacherInfo = teacherInfo;
         this.questions = questions;
+    }*/
+
+    openInfoPopup(className:string):void{
+        popup.classList.add(className);
     }
+    
+    /*getExerciseInfoBtn():string{
+        
+    }
+    getQuestionsPromptBtn():string{
 
-
-    getExerciseInfo():string{}
-    getQuestionsPrompt():string{}
-    getInfoPrompt():string{}
+    }
+    getInfoPromptBtn():string{
+        
+    }*/
 }
 
 abstract class VideoActivity extends Activity{
+    video: HTMLVideoElement;
 
-    constructor(){super()}
+    constructor(video: HTMLVideoElement){
+        super();
+        this.video=video;
+    }
 
-    play():boolean{}
+    play():void{
+        this.video.play();
+    }
 
-    pause():boolean{}
+    pause():void{
+        this.video.pause();
+    }
 
-    changeVolume():number{}
+    changeVolume(vol:number):void{
+        this.video.volume = vol;
+    };
 
-    mute(){}
+    mute():void{
+    }
 
     // htmls leida alumised kaks
-    getPlaybackRate():number{
-
+    /*getPlaybackRate():number{
+        
     }
 
     getVideoLength():number{
 
-    }
+    }*/
 
     
 }
 
 class SpeedVideo extends VideoActivity {
 
-    changeSpeed(){
-
+    changeSpeed(speed:number):void{
+        this.video.playbackRate = speed;
         }
 
     reset(){

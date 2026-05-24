@@ -7,30 +7,50 @@
     <script src="eksam.js"></script>
 
     <script>
-        video = new VideoAction();
+
+        let videoApp = null;
+
+        function startPage(){
+            let videoElement = document.getElementById("video");
+            videoApp = new SpeedVideo(videoElement);
+        }
 
         function setVolume(){
             let vol = document.getElementById("volBtn").value;
-            video.setVolume(vol);
+            videoApp.changeVolume(vol);
         }
 
         function setSpeed(){
             let speed = document.getElementById("speedBtn").value;
-            video.setSpeed(speed);
+            videoApp.changeSpeed(speed);
+            document.getElementById("showSpeed").innerText = speed;
 
         }
 
-        function setPosition(){
-            let position = document.getElementById("positionBtn").value;
-            video.setPosition(position);
+        function pause(){
+            video.pause();
+            document.getElementById("playBtn").style.display = "";
+            document.getElementById("pauseBtn").style.display = "none";
         }
+
+        function play(){
+            video.play();
+            document.getElementById("pauseBtn").style.display = "";
+            document.getElementById("playBtn").style.display = "none";
+        }
+
+        function openInfoPopup(){
+
+            popup.classList.add("open-popup");
+        }
+
 
     </script>
 </head>
 
-<body>
-    <video id="ifiVideo" controls width="600" preload="none">
-        <source src="../../~rinde/media/videos/IFI_reklaam_no_audio.mp4" type="video/mp4">
+<body onload="startPage()">
+    <video id="video" controls width="600" preload="none">
+        <source src="Carolina_testimine.mp4" type="video/mp4">
     </video>
     <br>
     <label for="volBtn">Helitugevus: </label>
@@ -38,8 +58,13 @@
     <br>
     <label for="speedBtn">Esituskiirus: </label>
     <input id="speedBtn" type="range" min=".1" max="5" step=".01" value="1" onchange="setSpeed()">
+    <p id="showSpeed"></p>
     <br>
-    <p>Video positsioon: <span id="musicPos">0:00:00:00</span></p>
-	<input id="musicPosBtn" type="range" min="0" value="0" step=".001" onchange="setPosition()">
+    <button id="pauseBtn" onclick="pause()" style="display: none">| |</button>
+    <button id="playBtn" onclick="play()"> > </button>
+    <div class="popup" id="popup">
+        <p>text</p>
+        <button>x</button>
+    </div>
 </body>
 </html>
