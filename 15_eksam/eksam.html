@@ -24,7 +24,6 @@
             let speed = document.getElementById("speedBtn").value;
             videoApp.changeSpeed(speed);
             document.getElementById("showSpeed").innerText = speed;
-
         }
 
         function pause(){
@@ -40,16 +39,14 @@
         }
 
         function openInfoPopup(){
-
             popup.classList.add("open-popup");
         }
-
 
     </script>
 </head>
 
 <body onload="startPage()">
-    <video id="video" controls width="600" preload="none">
+    <video id="video" controls width="600" preload="">
         <source src="Carolina_testimine.mp4" type="video/mp4">
     </video>
     <br>
@@ -62,9 +59,25 @@
     <br>
     <button id="pauseBtn" onclick="pause()" style="display: none">| |</button>
     <button id="playBtn" onclick="play()"> > </button>
-    <div class="popup" id="popup">
+    <br>
+    <br>
+    <button>info</button>
+    <button>questions</button>
+    <button>discussion</button>
+    <div class="questions" id="popup">
         <p>text</p>
         <button>x</button>
     </div>
+
+    <div class="exerciseInfo" id="popup">
+        <p>text</p>
+        <button>x</button>
+    </div>
+
+    <div class="teacherInfo" id="popup">
+        <p>text</p>
+        <button>x</button>
+    </div>
+
 </body>
 </html>

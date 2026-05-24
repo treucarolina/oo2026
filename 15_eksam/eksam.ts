@@ -14,6 +14,7 @@ abstract class Activity {
     }*/
 
     openInfoPopup(className:string):void{
+        //see pole õige prgu
         popup.classList.add(className);
     }
     
