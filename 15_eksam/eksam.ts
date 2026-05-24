@@ -1,39 +1,44 @@
 
-/*let popup:HTMLElement = document.getElementById("popup");*/
-
 abstract class Activity {
-    popup:HTMLElement;
-    /*questions:string;
-    exerciseInfo:string;
-    teacherInfo:string;
+    questions:HTMLElement;
+    exerciseInfo:HTMLElement;
+    teacherInfo:HTMLElement;
 
-    constructor(questions:string, exerciseInfo:string, teacherInfo:string){
+    constructor(questions:HTMLElement, exerciseInfo:HTMLElement, teacherInfo:HTMLElement){
         this.exerciseInfo = exerciseInfo;
         this.teacherInfo = teacherInfo;
         this.questions = questions;
-    }*/
+    }
 
-    openInfoPopup(className:string):void{
-        //see pole õige prgu
-        popup.classList.add(className);
+    openInfoPopup(button:string):void{
+        if (button === "questionsBtn"){
+                this.exerciseInfo.style.display = "none";
+                this.teacherInfo.style.display = "none";
+                this.questions.style.display = "";
+            } else if (button === "excBtn"){
+                this.questions.style.display = "none";
+                this.teacherInfo.style.display = "none";
+                this.exerciseInfo.style.display = "";
+            } else if (button === "infoBtn"){
+                this.questions.style.display = "none";
+                this.exerciseInfo.style.display = "none";
+                this.teacherInfo.style.display = "";
+            }
     }
-    
-    /*getExerciseInfoBtn():string{
-        
-    }
-    getQuestionsPromptBtn():string{
 
+    closeInfoPopup():void{
+        this.exerciseInfo.style.display = "none";
+        this.teacherInfo.style.display = "none";
+        this.questions.style.display = "none";
     }
-    getInfoPromptBtn():string{
-        
-    }*/
+
 }
 
 abstract class VideoActivity extends Activity{
     video: HTMLVideoElement;
 
-    constructor(video: HTMLVideoElement){
-        super();
+    constructor(questions:HTMLElement, exerciseInfo:HTMLElement, teacherInfo:HTMLElement, video: HTMLVideoElement){
+        super(questions, exerciseInfo, teacherInfo);
         this.video=video;
     }
 
@@ -49,19 +54,7 @@ abstract class VideoActivity extends Activity{
         this.video.volume = vol;
     };
 
-    mute():void{
-    }
-
-    // htmls leida alumised kaks
-    /*getPlaybackRate():number{
-        
-    }
-
-    getVideoLength():number{
-
-    }*/
-
-    
+  
 }
 
 class SpeedVideo extends VideoActivity {
@@ -69,9 +62,5 @@ class SpeedVideo extends VideoActivity {
     changeSpeed(speed:number):void{
         this.video.playbackRate = speed;
         }
-
-    reset(){
-
-    }
 
 }

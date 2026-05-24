@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="eksam.js"></script>
+    <link rel="stylesheet" href="style.css">
 
     <script>
 
         let videoApp = null;
 
         function startPage(){
+            document.getElementById("volBtn").value = 0.7;
+            document.getElementById("speedBtn").value = 1;
+            document.getElementById("showVolume").innerText = "1";
+            document.getElementById("showSpeed").innerText = "0.7";
             let videoElement = document.getElementById("video");
-            videoApp = new SpeedVideo(videoElement);
+            let exerciseInfo = document.getElementById("exerciseInfo");
+            let teacherInfo = document.getElementById("teacherInfo");
+            let questions = document.getElementById("questions");
+            videoApp = new SpeedVideo(questions, exerciseInfo, teacherInfo, videoElement);
         }
 
         function setVolume(){
             let vol = document.getElementById("volBtn").value;
             videoApp.changeVolume(vol);
+            document.getElementById("showVolume").innerText = vol;
         }
 
         function setSpeed(){
@@ -27,19 +36,23 @@
         }
 
         function pause(){
-            video.pause();
+            videoApp.pause();
             document.getElementById("playBtn").style.display = "";
             document.getElementById("pauseBtn").style.display = "none";
         }
 
         function play(){
-            video.play();
+            videoApp.play();
             document.getElementById("pauseBtn").style.display = "";
             document.getElementById("playBtn").style.display = "none";
         }
 
-        function openInfoPopup(){
-            popup.classList.add("open-popup");
+        function openPopup(button){
+            videoApp.openInfoPopup(button);
+        }
+
+        function closePopup(){
+            videoApp.closeInfoPopup();
         }
 
     </script>
@@ -52,31 +65,33 @@
     <br>
     <label for="volBtn">Helitugevus: </label>
     <input id="volBtn" type="range" min="0" max="1" step=".01" value=".7" onchange="setVolume()">
+    <p id="showVolume"></p>
     <br>
     <label for="speedBtn">Esituskiirus: </label>
     <input id="speedBtn" type="range" min=".1" max="5" step=".01" value="1" onchange="setSpeed()">
     <p id="showSpeed"></p>
     <br>
-    <button id="pauseBtn" onclick="pause()" style="display: none">| |</button>
-    <button id="playBtn" onclick="play()"> > </button>
+    <button id="pauseBtn" onclick="pause()" style="display: none">pause</button>
+    <button id="playBtn" onclick="play()">play</button>
     <br>
     <br>
-    <button>info</button>
-    <button>questions</button>
-    <button>discussion</button>
-    <div class="questions" id="popup">
-        <p>text</p>
-        <button>x</button>
+    <button id="questionsBtn" onclick="openPopup('questionsBtn')">info</button>
+    <button id="excBtn" onclick="openPopup('excBtn')">exercise</button>
+    <button id="infoBtn" onclick="openPopup('infoBtn')">discussion</button>
+
+    <div class="questions" id="questions" style="display: none">
+        <p>text 1</p>
+        <button id="closeBtn1" onclick="closePopup()">x</button>
     </div>
 
-    <div class="exerciseInfo" id="popup">
-        <p>text</p>
-        <button>x</button>
+    <div class="exerciseInfo" id="exerciseInfo" style="display: none">
+        <p>text 2</p>
+        <button id="closeBtn2" onclick="closePopup()">x</button>
     </div>
 
-    <div class="teacherInfo" id="popup">
-        <p>text</p>
-        <button>x</button>
+    <div class="teacherInfo" id="teacherInfo" style="display: none">
+        <p>text 3</p>
+        <button id="closeBtn3" onclick="closePopup()">x</button>
     </div>
 
 </body>

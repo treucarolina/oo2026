@@ -1,4 +1,3 @@
-/*let popup:HTMLElement = document.getElementById("popup");*/
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -15,26 +14,39 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Activity = /** @class */ (function () {
-    function Activity() {
-    }
-    /*questions:string;
-    exerciseInfo:string;
-    teacherInfo:string;
-
-    constructor(questions:string, exerciseInfo:string, teacherInfo:string){
+    function Activity(questions, exerciseInfo, teacherInfo) {
         this.exerciseInfo = exerciseInfo;
         this.teacherInfo = teacherInfo;
         this.questions = questions;
-    }*/
-    Activity.prototype.openInfoPopup = function (className) {
-        /*popup.classList.add(className);*/
+    }
+    Activity.prototype.openInfoPopup = function (button) {
+        if (button === "questionsBtn") {
+            this.exerciseInfo.style.display = "none";
+            this.teacherInfo.style.display = "none";
+            this.questions.style.display = "";
+        }
+        else if (button === "excBtn") {
+            this.questions.style.display = "none";
+            this.teacherInfo.style.display = "none";
+            this.exerciseInfo.style.display = "";
+        }
+        else if (button === "infoBtn") {
+            this.questions.style.display = "none";
+            this.exerciseInfo.style.display = "none";
+            this.teacherInfo.style.display = "";
+        }
+    };
+    Activity.prototype.closeInfoPopup = function () {
+        this.exerciseInfo.style.display = "none";
+        this.teacherInfo.style.display = "none";
+        this.questions.style.display = "none";
     };
     return Activity;
 }());
 var VideoActivity = /** @class */ (function (_super) {
     __extends(VideoActivity, _super);
-    function VideoActivity(video) {
-        var _this = _super.call(this) || this;
+    function VideoActivity(questions, exerciseInfo, teacherInfo, video) {
+        var _this = _super.call(this, questions, exerciseInfo, teacherInfo) || this;
         _this.video = video;
         return _this;
     }
@@ -48,8 +60,6 @@ var VideoActivity = /** @class */ (function (_super) {
         this.video.volume = vol;
     };
     ;
-    VideoActivity.prototype.mute = function () {
-    };
     return VideoActivity;
 }(Activity));
 var SpeedVideo = /** @class */ (function (_super) {
@@ -59,8 +69,6 @@ var SpeedVideo = /** @class */ (function (_super) {
     }
     SpeedVideo.prototype.changeSpeed = function (speed) {
         this.video.playbackRate = speed;
-    };
-    SpeedVideo.prototype.reset = function () {
     };
     return SpeedVideo;
 }(VideoActivity));
