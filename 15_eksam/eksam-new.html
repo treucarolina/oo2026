@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="eksam.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        let volumeChangeNr = 0;
+        let speedChangeNr = 0;
+
+        let videoApp = null;
+
+        function startPage(){
+            document.getElementById("volBtn").value = 0.7;
+            document.getElementById("speedBtn").value = 1;
+            document.getElementById("showVolume").innerText = "1";
+            document.getElementById("showSpeed").innerText = "0.7";
+            let videoElement = document.getElementById("video");
+            let exerciseInfo = document.getElementById("exerciseInfo");
+            let teacherInfo = document.getElementById("teacherInfo");
+            let questions = document.getElementById("questions");
+            let score = document.getElementById("score");
+            videoApp = new SpeedVideo(questions, exerciseInfo, teacherInfo, score, videoElement);
+        }
+
+        function setVolume(){
+            let vol = document.getElementById("volBtn").value;
+            videoApp.changeVolume(vol);
+            document.getElementById("showVolume").innerText = vol;
+            volumeChangeNr ++;
+            document.getElementById("volumeChange").innerText = volumeChangeNr;
+        }
+
+        function setSpeed(){
+            let speed = document.getElementById("speedBtn").value;
+            videoApp.changeSpeed(speed);
+            document.getElementById("showSpeed").innerText = speed;
+            speedChangeNr ++;
+            document.getElementById("speedChange").innerText = speedChangeNr;
+        }
+
+        function pause(){
+            videoApp.pause();
+            document.getElementById("playBtn").style.display = "";
+            document.getElementById("pauseBtn").style.display = "none";
+        }
+
+        function play(){
+            videoApp.play();
+            document.getElementById("pauseBtn").style.display = "";
+            document.getElementById("playBtn").style.display = "none";
+        }
+
+        function openPopup(button){
+            videoApp.openInfoPopup(button);
+        }
+
+        function closePopup(){
+            videoApp.closeInfoPopup();
+        }
+
+        function showScore(){
+            videoApp.showScore();
+            document.getElementById("hideScore").style.display = "";
+            document.getElementById("showScore").style.display = "none";
+        }
+
+        function hideScore(){
+            videoApp.hideScore();
+            document.getElementById("showScore").style.display = "";
+            document.getElementById("hideScore").style.display = "none";
+        }
+
+    </script>
+</head>
+
+<body onload="startPage()">
+    <div class="container">
+        <div class="gamePart">
+            <video id="video" controls width="500" preload="">
+                <source src="tava.mp4" type="video/mp4">
+            </video>
+            <br>
+            <button id="pauseBtn" class="pauseBtn" onclick="pause()" style="display: none">||</button>
+            <button id="playBtn" class="playBtn" onclick="play()">▶</button>
+            <br>
+            <br>
+            <label for="volBtn">Helitugevus: </label>
+            <input id="volBtn" type="range" min="0" max="1" step=".01" value=".7" onchange="setVolume()">
+            <p id="showVolume"></p>
+            <br>
+            <label for="speedBtn">Esituskiirus: </label>
+            <input id="speedBtn" type="range" min=".1" max="5" step=".01" value="1" onchange="setSpeed()">
+            <p id="showSpeed"></p>
+            <br>
+            <button id="questionsBtn" onclick="openPopup('questionsBtn')">info</button>
+            <button id="excBtn" onclick="openPopup('excBtn')">ülesanne</button>
+            <button id="infoBtn" onclick="openPopup('infoBtn')">küsimused</button>
+            <br>
+            <br>
+            <button id="showScore" class="scoreBtn" onclick="showScore()" style="display: none">Näita skoori</button>
+            <button id="hideScore" class="scoreBtn" onclick="hideScore()">Peida skoor</button>
+            <div id="score">
+                <p>Helitugevust muudetud: <span id="volumeChange" class="dataChange">0</span> korda</p>
+                <p>Kiirust muudetud: <span id="speedChange" class="dataChange">0</span> korda</p>
+            </div>
+        </div>
+        <div class="questions" id="questions" style="display: none">
+            <h2>Milliseid oskusi heli analüüs lastel arendab:</h2>
+            <p>Video analüüs aitab lastel mõista, et liikuv pilt ei ole lihtsalt „see, mis juhtub”, vaid meediaelement, mida saab muuta. Kui sama videot näidatakse eri kiirustel, märkavad lapsed, et liikumine, tempo, detailid ja tähendus võivad muutuda.</p>
+            <h3>Meediapädevus</h3>
+            <p>Laps õpib, et video:</p>
+            <ul>
+                <li>näitab tegevust ajas, mitte ainult üht hetke nagu pilt;</li>
+                <li>võib eri kiirusel vaadates anda väga erineva mulje;</li>
+                <li>võib mõjutada seda, kuidas vaataja tegevust mõistab, tõlgendab ja tunneb.</li>
+            </ul>
+            <h3>Video analüüs arendab lastel:</h3>
+            <ul>
+                <li>tähelepanelikku vaatamist ja detailide märkamist;</li>
+                <li>võrdlemisoskust;</li>
+                <li>arusaamist liikumisest, järjestusest ja ajast;</li>
+            </ul>
+
+            <button id="closeBtn1" onclick="closePopup()">x</button>
+        </div>
+
+        <div class="exerciseInfo" id="exerciseInfo" style="display: none">
+            <ul>
+                <li>Mida sa videos märkasid tavakiirusel?</li>
+                <li>Mis muutus siis, kui video läks kiiremaks?</li>
+                <li>Kas kõik oli sama hästi arusaadav ka kiirelt vaadates?</li>
+                <li>Millised detailid jäid väga kiire video puhul märkamata?</li>
+                <li>Kumb video oli sinu jaoks kõige lihtsam jälgida? Miks?</li>
+            </ul>
+            <button id="closeBtn2" onclick="closePopup()">x</button>
+        </div>
+
+        <div class="teacherInfo" id="teacherInfo" style="display: none">
+            <h3>Liikumise mäng</h3>
+            <p>Õpetaja või üks laps teeb mingi lihtsa tegevuse, näiteks:</p>
+            <ul>
+                <li>kõnnib üle ruumi,</li>
+                <li>lehvitab,</li>
+                <li>hüppab,</li>
+            </ul>
+
+            <button id="closeBtn3" onclick="closePopup()">x</button>
+        </div>
+    </div>
+</body>
+</html>
